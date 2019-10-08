@@ -1,0 +1,93 @@
+﻿@*<link href="/Content/css/ListBox/FlagsAll.css" rel="stylesheet" type="text/css" />*@
+
+<div class="outer">
+    <ul id="mymenu">
+        <li data-href="#home">Home</li>
+        <li data-href="#products">
+            <p>Products</p>
+            <ul>
+                <li data-href="#clothes">
+                    <p>Clothes</p>
+                    <ul>
+                        <li data-href="#shirts">Shirts</li>
+                        <li data-href="#sweaters">Sweaters</li>
+                        <li data-href="#pants">Pants</li>
+                    </ul>
+                </li>
+                <li data-href="#shoes">
+                    <p>Shoes</p>
+                    <ul>
+                        <li data-href="#winter-shoes">Winter shoes</li>
+                        <li data-href="#summer-shoes">Summer shoes</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <div>Contacts</div>
+            <ul>
+                <li data-class="megamenu">
+                    <div class="megamenu-inner">
+                        <div style="display: inline-block; width: 190px;">
+                            <h3>Europe</h3>
+                            <p>ClothesShoes Company Gmbh.</p>
+                            <p>Unter-Wald-Strasse 2</p>
+                            <p>60486 Frankfurt</p>
+                            <p><span class="flag flag-de"></span> Germany</p>
+                            <br />
+                            <p><a class="mmlink" href="#">Visit Website</a></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+@*@(Html.ShieldMenu()
+    .Name("mymenu")
+    .Cls("mymenu")
+    .Orientation(Shield.Mvc.UI.Menu.MenuOrientationOptions.Vertical))*@
+
+@*<style>
+        .outer{
+            font-size: 800px;
+        }
+    </style>*@
+
+<style>
+    .outer {
+        margin: auto;
+        max-width: 600px;
+        min-height: 100px;
+    }
+
+    .mymenu {
+        width: 200px;
+    }
+
+    .megamenu:hover,
+    .megamenu.sui-menu-item-selected {
+        background-color: transparent;
+        color: inherit;
+    }
+
+    .megamenu .flag {
+        display: inline-block;
+    }
+
+    .megamenu .mmlink {
+        color: blue;
+        text-decoration: underline;
+    }
+
+    .megamenu-inner {
+        width: 200px;
+    }
+
+    @@media screen and (max-width: 250px) {
+        .megamenu-inner {
+            width: 150px;
+        }
+    }
+</style>

@@ -194,9 +194,19 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910101247243_CreateDB.cs" />
+    <Compile Include="Migrations\201910101247243_CreateDB.Designer.cs">
+      <DependentUpon>201910101247243_CreateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910101249182_UpdateUserTable.cs" />
+    <Compile Include="Migrations\201910101249182_UpdateUserTable.Designer.cs">
+      <DependentUpon>201910101249182_UpdateUserTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\DataContext.cs" />
     <Compile Include="Repository\InMemoryRepository.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -267,6 +277,7 @@
     <Content Include="Views\Maintenance\Index.cshtml" />
     <Content Include="Views\GameStats\Index.cshtml" />
     <Content Include="Views\Shared\SideMenuPartial.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -283,6 +294,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201910101247243_CreateDB.resx">
+      <DependentUpon>201910101247243_CreateDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910101249182_UpdateUserTable.resx">
+      <DependentUpon>201910101249182_UpdateUserTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

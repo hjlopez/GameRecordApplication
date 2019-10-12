@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNet.Identity
-@*@model GameRecordApplication.Models.RegisterViewModel*@
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -9,6 +8,13 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
                 @Html.ActionLink("Hello " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "View Profile" })
+            </li>
+            <li>
+                @*@if (Roles.GetRolesForUser().Contains("User"))
+                {
+                    @Html.ActionLink("Hello " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "View Profile" })
+                }*@
+
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>

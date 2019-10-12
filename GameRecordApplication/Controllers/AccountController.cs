@@ -159,7 +159,8 @@ namespace GameRecordApplication.Controllers
                         LastName = model.LastName,
                         Username = model.Username,
                         Email = model.Email,
-                        UserId = user.Id
+                        UserId = user.Id,
+                        UserRole = "3"
                     };
 
                     userRepository.Insert(userInfo);

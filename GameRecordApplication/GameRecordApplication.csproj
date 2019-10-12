@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201910101249182_UpdateUserTable.Designer.cs">
       <DependentUpon>201910101249182_UpdateUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910121407511_UpdateUserTable1.cs" />
+    <Compile Include="Migrations\201910121407511_UpdateUserTable1.Designer.cs">
+      <DependentUpon>201910121407511_UpdateUserTable1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repository\DataContext.cs" />
     <Compile Include="Repository\InMemoryRepository.cs" />
@@ -281,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -301,6 +306,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910101249182_UpdateUserTable.resx">
       <DependentUpon>201910101249182_UpdateUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910121407511_UpdateUserTable1.resx">
+      <DependentUpon>201910121407511_UpdateUserTable1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

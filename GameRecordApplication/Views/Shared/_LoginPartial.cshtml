@@ -10,7 +10,8 @@
                 @Html.ActionLink("Hello " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "View Profile" })
             </li>
             <li>
-                @*@if (Roles.GetRolesForUser().Contains("User"))
+               @*@{var x = Roles.GetRolesForUser(User.Identity.Name);}
+                @if (Roles.GetRolesForUser().Contains("User"))
                 {
                     @Html.ActionLink("Hello " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "View Profile" })
                 }*@

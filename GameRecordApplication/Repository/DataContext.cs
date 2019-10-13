@@ -16,5 +16,6 @@ namespace GameRecordApplication.Repository
         }
 
         public DbSet<User> User { get; set; }
+        public DbSet<GameTypes> GameTypes { get; set; }
     }
 }

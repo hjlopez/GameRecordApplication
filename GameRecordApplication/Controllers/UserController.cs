@@ -3,6 +3,7 @@ using GameRecordApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 
@@ -22,6 +23,25 @@ namespace GameRecordApplication.Controllers
         {
             List<User> userList = users.Collection().ToList();
             return View(userList);
+            //List<User> userList = (from user in Context.
+            //                      select new
+            //                      {
+            //                          UserId = user.Id,
+            //                          Username = user.UserName,
+            //                          Email = user.Email,
+            //                          RoleNames = (from userRole in user.Roles
+            //                                       join role in context.Roles on userRole.RoleId
+            //                                       equals role.Id
+            //                                       select role.Name).ToList()
+            //                      }).ToList().Select(p => new User()
+
+            //                      {
+            //                          UserId = p.UserId,
+            //                          Username = p.Username,
+            //                          Email = p.Email,
+            //                          UserRole = string.Join(",", p.RoleNames)
+            //                      });
+
         }
 
         // GET: User/Details/5

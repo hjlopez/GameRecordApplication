@@ -191,6 +191,7 @@
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GameStatsController.cs" />
+    <Compile Include="Controllers\GameTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -210,7 +211,12 @@
     <Compile Include="Migrations\201910121407511_UpdateUserTable1.Designer.cs">
       <DependentUpon>201910121407511_UpdateUserTable1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910130618546_GTTable.cs" />
+    <Compile Include="Migrations\201910130618546_GTTable.Designer.cs">
+      <DependentUpon>201910130618546_GTTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\GameTypes.cs" />
     <Compile Include="Repository\DataContext.cs" />
     <Compile Include="Repository\InMemoryRepository.cs" />
     <Compile Include="Models\BaseEntity.cs" />
@@ -282,6 +288,8 @@
     <Content Include="Views\GameStats\Index.cshtml" />
     <Content Include="Views\Shared\SideMenuPartial.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\GameType\Index.cshtml" />
+    <Content Include="Views\GameType\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910121407511_UpdateUserTable1.resx">
       <DependentUpon>201910121407511_UpdateUserTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910130618546_GTTable.resx">
+      <DependentUpon>201910130618546_GTTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

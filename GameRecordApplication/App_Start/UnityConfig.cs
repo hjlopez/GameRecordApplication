@@ -46,6 +46,7 @@ namespace GameRecordApplication
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IRepository<User>, SQLRepository<User>>();
+            container.RegisterType<IRepository<GameTypes>, SQLRepository<GameTypes>>();
         }
     }
 }

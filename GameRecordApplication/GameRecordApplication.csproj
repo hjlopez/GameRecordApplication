@@ -290,6 +290,8 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\GameType\Index.cshtml" />
     <Content Include="Views\GameType\Create.cshtml" />
+    <Content Include="Views\GameType\Edit.cshtml" />
+    <Content Include="Views\GameType\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

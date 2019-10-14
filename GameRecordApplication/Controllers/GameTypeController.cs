@@ -10,12 +10,8 @@ namespace GameRecordApplication.Controllers
 {
     public class GameTypeController : Controller
     {
-        IRepository<GameTypes> GameTypes = new IRepository<GameTypes>;
+        IRepository<GameTypes> GameTypes;
 
-        public GameTypeController()
-        {
-            
-        }
 
         public GameTypeController(IRepository<GameTypes> gametype)
         {
@@ -25,7 +21,8 @@ namespace GameRecordApplication.Controllers
         // GET: GameType
         public ActionResult Index()
         {
-            return View();
+            List<GameTypes> types = GameTypes.Collection().ToList();
+            return View(types);
         }
 
         // GET: GameType/Details/5
@@ -59,46 +56,75 @@ namespace GameRecordApplication.Controllers
         }
 
         // GET: GameType/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string Id)
         {
-            return View();
+            GameTypes types = GameTypes.Find(Id);
+            if (types == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(types);
+            }
         }
 
         // POST: GameType/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(GameTypes gameTypes, string Id)
         {
-            try
+            GameTypes typeToEdit = GameTypes.Find(Id);
+
+            if (typeToEdit == null)
             {
-                // TODO: Add update logic here
+                return HttpNotFound();
+            }
+            else
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(typeToEdit);
+                }
+
+                typeToEdit.Type = gameTypes.Type;
+
+                GameTypes.Commit();
 
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
             }
         }
 
         // GET: GameType/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string Id)
         {
-            return View();
+            GameTypes typeToDelete = GameTypes.Find(Id);
+
+            if (typeToDelete == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(typeToDelete);
+            }
         }
 
         // POST: GameType/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ActionName("Delete")]
+        public ActionResult ConfirmDelete(string Id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            GameTypes typeToDelete = GameTypes.Find(Id);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (typeToDelete == null)
             {
-                return View();
+                return HttpNotFound();
+            }
+            else
+            {
+                GameTypes.Delete(Id);
+                GameTypes.Commit();
+                return RedirectToAction("Index");
             }
         }
     }

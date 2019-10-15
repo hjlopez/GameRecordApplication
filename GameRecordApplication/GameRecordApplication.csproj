@@ -190,6 +190,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameStatsController.cs" />
     <Compile Include="Controllers\GameTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -215,7 +216,16 @@
     <Compile Include="Migrations\201910130618546_GTTable.Designer.cs">
       <DependentUpon>201910130618546_GTTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910151323273_Games.cs" />
+    <Compile Include="Migrations\201910151323273_Games.Designer.cs">
+      <DependentUpon>201910151323273_Games.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910151329012_Add TypeId to Game Types.cs" />
+    <Compile Include="Migrations\201910151329012_Add TypeId to Game Types.Designer.cs">
+      <DependentUpon>201910151329012_Add TypeId to Game Types.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameTypes.cs" />
     <Compile Include="Repository\DataContext.cs" />
     <Compile Include="Repository\InMemoryRepository.cs" />
@@ -292,6 +302,8 @@
     <Content Include="Views\GameType\Create.cshtml" />
     <Content Include="Views\GameType\Edit.cshtml" />
     <Content Include="Views\GameType\Delete.cshtml" />
+    <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Game\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -322,6 +334,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910130618546_GTTable.resx">
       <DependentUpon>201910130618546_GTTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910151323273_Games.resx">
+      <DependentUpon>201910151323273_Games.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910151329012_Add TypeId to Game Types.resx">
+      <DependentUpon>201910151329012_Add TypeId to Game Types.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

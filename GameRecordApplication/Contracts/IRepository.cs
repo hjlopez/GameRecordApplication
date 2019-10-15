@@ -11,8 +11,8 @@ namespace GameRecordApplication.Contracts
     {
         IQueryable<T> Collection();
         void Commit();
-        void Delete(string id);
-        T Find(string id);
+        void Delete(long id);
+        T Find(long id);
         void Insert(T t);
         void Update(T t);
     }

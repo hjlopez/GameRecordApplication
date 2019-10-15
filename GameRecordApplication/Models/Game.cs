@@ -7,11 +7,14 @@ using System.Web;
 
 namespace GameRecordApplication.Models
 {
-    public class GameTypes:BaseEntity
+    public class Game : BaseEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long TypeId { get; set; }
-        public string Type { get; set; }
+        public long GameId { get; set; }
+        public string GameName { get; set; }
+        public string GameType { get; set; }
+        public int MaxPlayers { get; set; }
+        public bool HasSeason { get; set; }
     }
 }

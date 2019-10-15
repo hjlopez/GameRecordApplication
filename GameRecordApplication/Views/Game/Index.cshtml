@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GameRecordApplication.Models.Game>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Game")
+        </th>
+        <th>
+            @Html.DisplayName("Game Type")
+        </th>
+        <th>
+            @Html.DisplayName("Max Players")
+        </th>
+        <th>
+            @Html.DisplayName("Season?")
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GameType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxPlayers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HasSeason)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new {  id=item.GameId  }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.GameId }) |
+                    @Html.ActionLink("Delete", "Delete", new {  id=item.GameId })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

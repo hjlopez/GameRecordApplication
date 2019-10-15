@@ -29,7 +29,7 @@ namespace GameRecordApplication.Repository
             context.SaveChanges();
         }
 
-        public void Delete(string id)
+        public void Delete(long id)
         {
             var t = Find(id);
             if (context.Entry(t).State == EntityState.Detached)
@@ -40,7 +40,7 @@ namespace GameRecordApplication.Repository
             dbSet.Remove(t);
         }
 
-        public T Find(string id)
+        public T Find(long id)
         {
             return dbSet.Find(id);
         }

@@ -48,9 +48,10 @@ namespace GameRecordApplication.InMemory
             }
         }
 
-        public T Find(string id)
+        public T Find(long id)
         {
-            T t = items.Find(i => i.Id == id);
+
+            T t = items.Find(i => i.Id == "");
 
             if (t != null)
             {
@@ -67,18 +68,18 @@ namespace GameRecordApplication.InMemory
             return items.AsQueryable();
         }
 
-        public void Delete(string id)
+        public void Delete(long id)
         {
-            T tToDelete = items.Find(i => i.Id == id);
+            //T tToDelete = items.Find(i => id);
 
-            if (tToDelete != null)
-            {
-                items.Remove(tToDelete);
-            }
-            else
-            {
-                throw new Exception(className + " Not found.");
-            }
+            ////if (tToDelete != null)
+            ////{
+            ////    items.Remove(tToDelete);
+            ////}
+            ////else
+            ////{
+            ////    throw new Exception(className + " Not found.");
+            ////}
         }
     }
 }

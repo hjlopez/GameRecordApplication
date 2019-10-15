@@ -56,7 +56,7 @@ namespace GameRecordApplication.Controllers
         }
 
         // GET: GameType/Edit/5
-        public ActionResult Edit(string Id)
+        public ActionResult Edit(long Id)
         {
             GameTypes types = GameTypes.Find(Id);
             if (types == null)
@@ -71,7 +71,7 @@ namespace GameRecordApplication.Controllers
 
         // POST: GameType/Edit/5
         [HttpPost]
-        public ActionResult Edit(GameTypes gameTypes, string Id)
+        public ActionResult Edit(GameTypes gameTypes, long Id)
         {
             GameTypes typeToEdit = GameTypes.Find(Id);
 
@@ -95,7 +95,7 @@ namespace GameRecordApplication.Controllers
         }
 
         // GET: GameType/Delete/5
-        public ActionResult Delete(string Id)
+        public ActionResult Delete(long Id)
         {
             GameTypes typeToDelete = GameTypes.Find(Id);
 
@@ -112,7 +112,7 @@ namespace GameRecordApplication.Controllers
         // POST: GameType/Delete/5
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult ConfirmDelete(string Id)
+        public ActionResult ConfirmDelete(long Id)
         {
             GameTypes typeToDelete = GameTypes.Find(Id);
 

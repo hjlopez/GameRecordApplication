@@ -33,7 +33,8 @@ namespace GameRecordApplication.Controllers
         // GET: Game/Create
         public ActionResult Create()
         {
-            return View();
+            Game game = new Game();
+            return View(game);
         }
 
         // POST: Game/Create

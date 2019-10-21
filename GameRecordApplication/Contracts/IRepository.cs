@@ -15,5 +15,6 @@ namespace GameRecordApplication.Contracts
         T Find(long id);
         void Insert(T t);
         void Update(T t);
+        bool IsValid(long num);
     }
 }

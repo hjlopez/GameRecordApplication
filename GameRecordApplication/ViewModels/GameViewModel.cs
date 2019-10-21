@@ -6,8 +6,9 @@ using System.Web;
 
 namespace GameRecordApplication.ViewModels
 {
-    public class GameTypeViewModel
+    public class GameViewModel
     {
-        public IEnumerable<GameTypes> GameTypes { get; set; }
+        public Game Game { get; set; }
+        public IEnumerable<GameTypes> Types { get; set; }
     }
 }

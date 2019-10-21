@@ -13,6 +13,7 @@ namespace GameRecordApplication.InMemory
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
         string className;
+        long min = 1;
 
         public InMemoryRepository()
         {
@@ -80,6 +81,11 @@ namespace GameRecordApplication.InMemory
             ////{
             ////    throw new Exception(className + " Not found.");
             ////}
+        }
+
+        public bool IsValid(long num)
+        {
+            return num <= min;
         }
     }
 }

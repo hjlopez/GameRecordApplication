@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,9 +13,17 @@ namespace GameRecordApplication.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long GameId { get; set; }
+
+        [DisplayName("Game")]
         public string GameName { get; set; }
+
+        [DisplayName("Type")]
         public string GameType { get; set; }
+
+        [DisplayName("Maximum Players")]
         public int MaxPlayers { get; set; }
+
+        [DisplayName("Has Season?")]
         public bool HasSeason { get; set; }
     }
 }

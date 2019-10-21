@@ -12,6 +12,7 @@ namespace GameRecordApplication.Repository
     {
         internal DataContext context;
         internal DbSet<T> dbSet;
+        internal long min = 1;
 
         public SQLRepository(DataContext context)
         {
@@ -54,6 +55,11 @@ namespace GameRecordApplication.Repository
         {
             dbSet.Attach(t);
             context.Entry(t).State = EntityState.Modified;
+        }
+
+        public bool IsValid(long num)
+        {
+            return num <= min;
         }
     }
 }

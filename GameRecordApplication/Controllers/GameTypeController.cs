@@ -54,6 +54,7 @@ namespace GameRecordApplication.Controllers
                 return RedirectToAction("Index");
             }
         }
+        
 
         // GET: GameType/Edit/5
         public ActionResult Edit(long Id)

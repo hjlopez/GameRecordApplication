@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GameRecordApplication.Contracts;
+using GameRecordApplication.Models;
+using GameRecordApplication.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +11,32 @@ namespace GameRecordApplication.Controllers
 {
     public class GameStatsController : Controller
     {
-        // GET: GameStats
-        public ActionResult Index()
+        IRepository<Game> game;
+
+        public GameStatsController(IRepository<Game> game)
         {
-            return View();
+            this.game = game;
+        }
+
+        // GET: GameStats
+        public ActionResult Index(string Category = null)
+        {
+            List<Game> listGame;
+
+            listGame = game.Collection().ToList();
+
+            //if (Category == null)
+            //{
+            //    listGame = game.Collection().ToList();
+            //}
+            //else
+            //{
+            //    listGame = game.Collection().Where(p => p.GameName == Category).ToList();
+            //}
+
+            GameStatsViewModel vmodel = new GameStatsViewModel();
+            vmodel.ListOfGames = listGame;
+            return View(vmodel);
         }
 
         // GET: GameStats/Details/5

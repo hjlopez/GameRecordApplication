@@ -1,7 +1,44 @@
-﻿
+﻿@model GameRecordApplication.ViewModels.GameStatsViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Game and Stats</h2>
+<br /><br />
+<div class="col-md-2">
+    <h4>Filter by Games</h4>
+    <div class="list-group">
+        @*@Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })*@
+        @foreach (var game in Model.ListOfGames)
+        {
+            @Html.ActionLink(game.GameName, "Index", new { Category = game.GameName }, new { @class = Request["Category"] == game.GameName ? "list-group-item active" : "list-group-item" })
+        }
+    </div>
+</div>
 
+<div class="col-md-10">
+    @for (int i = 0; i < 4; i++)
+    {
+        <div class="row">
+            <br />
+            <div class="col-sm-6 table-bordered">
+                <div class="card ">
+                    <div class="card-body ">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 table-bordered">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

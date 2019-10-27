@@ -18,5 +18,7 @@ namespace GameRecordApplication.Repository
         public DbSet<User> User { get; set; }
         public DbSet<GameTypes> GameTypes { get; set; }
         public DbSet<Game> Games { get; set; }
+        public DbSet<Season> Seasons { get; set; }
+        public DbSet<Match> Matches { get; set; }
     }
 }

@@ -9,49 +9,38 @@ using System.Web.Mvc;
 
 namespace GameRecordApplication.Controllers
 {
-    public class GameStatsController : Controller
+    public class MatchController : Controller
     {
-        IRepository<Game> game;
+        IRepository<Game> context;
 
-        public GameStatsController(IRepository<Game> game)
+        public MatchController(IRepository<Game> game)
         {
-            this.game = game;
+            this.context = game;
         }
 
-        // GET: GameStats
-        public ActionResult Index(string Category = "")
+        // GET: Match
+        public ActionResult Index()
         {
-            List<Game> listGame;
-
-            listGame = game.Collection().ToList();
-
-            //if (Category == null)
-            //{
-            //    listGame = game.Collection().ToList();
-            //}
-            //else
-            //{
-            //    listGame = game.Collection().Where(p => p.GameName == Category).ToList();
-            //}
-
-            MatchViewModel vmodel = new MatchViewModel();
-            vmodel.ListOfGames = listGame;
-            return View(vmodel);
+            return View();
         }
 
-        // GET: GameStats/Details/5
+        // GET: Match/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: GameStats/Create
-        public ActionResult Create()
+        // GET: Match/Create
+        public ActionResult Create(string Category = null)
         {
+            List<Game> game = context.Collection().ToList();
+            MatchViewModel viewModel = new MatchViewModel();
+
+            viewModel.ListOfGames = game;
             return View();
         }
 
-        // POST: GameStats/Create
+        // POST: Match/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -67,13 +56,13 @@ namespace GameRecordApplication.Controllers
             }
         }
 
-        // GET: GameStats/Edit/5
+        // GET: Match/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: GameStats/Edit/5
+        // POST: Match/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -89,13 +78,13 @@ namespace GameRecordApplication.Controllers
             }
         }
 
-        // GET: GameStats/Delete/5
+        // GET: Match/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: GameStats/Delete/5
+        // POST: Match/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

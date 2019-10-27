@@ -48,6 +48,8 @@ namespace GameRecordApplication
             container.RegisterType<IRepository<User>, SQLRepository<User>>();
             container.RegisterType<IRepository<GameTypes>, SQLRepository<GameTypes>>();
             container.RegisterType<IRepository<Game>, SQLRepository<Game>>();
+            container.RegisterType<IRepository<Season>, SQLRepository<Season>>();
+            container.RegisterType<IRepository<Match>, SQLRepository<Match>>();
         }
     }
 }

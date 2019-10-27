@@ -6,9 +6,12 @@ using System.Web;
 
 namespace GameRecordApplication.ViewModels
 {
-    public class GameStatsViewModel
+    public class MatchViewModel
     {
         public Game Game { get; set; }
+        public User User { get; set; }
+        public Match Match { get; set; }
         public IEnumerable<Game> ListOfGames { get; set; }
+        public IEnumerable<Match> ListOfMatches { get; set; }
     }
 }

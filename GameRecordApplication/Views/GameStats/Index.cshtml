@@ -1,44 +1,86 @@
-﻿@model GameRecordApplication.ViewModels.GameStatsViewModel
+﻿@model GameRecordApplication.ViewModels.MatchViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <br /><br />
+
 <div class="col-md-2">
     <h4>Filter by Games</h4>
     <div class="list-group">
-        @*@Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })*@
+        @Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
         @foreach (var game in Model.ListOfGames)
         {
             @Html.ActionLink(game.GameName, "Index", new { Category = game.GameName }, new { @class = Request["Category"] == game.GameName ? "list-group-item active" : "list-group-item" })
         }
     </div>
+    @if (Request["Category"] == null)
+    {
+        <a class="btn btn-success disabled" href="@Url.Action("Create","Match",new { Category = Request["Category"] })">New Entry</a>
+    }
+    else
+    {
+        <a class="btn btn-success" href="@Url.Action("Create","Match",new { Category = Request["Category"] })">New Entry</a>
+    }
+
 </div>
 
+
 <div class="col-md-10">
-    @for (int i = 0; i < 4; i++)
+    @foreach (var game in Model.ListOfGames)
     {
-        <div class="row">
-            <br />
-            <div class="col-sm-6 table-bordered">
-                <div class="card ">
-                    <div class="card-body ">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+        if (Request.Params["Category"] == game.GameName && game.HasSeason)
+        {
+            <a class="btn btn-primary" data-target="#myModal" data-toggle="modal">Season</a>
+        }
+    }
+    @if (Model.ListOfMatches != null)
+    {
+        for (int i = 1; i < Model.ListOfMatches.Count(); i++)
+        {
+            <div class="row">
+                <br />
+                <div class="col-sm-6 table-bordered">
+                    <div class="card ">
+                        <div class="card-body ">
+                            <h5 class="card-title">Special title treatment</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
                     </div>
                 </div>
+                @if (Model.ListOfMatches.Count() > 1)
+                {
+                    <div class="col-sm-6 table-bordered">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
             </div>
-            <div class="col-sm-6 table-bordered">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
+
+        }
+    }
+
+</div>
+
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>asd</h4>
+            </div>
+            <div class="modal-body">
+                Gravity Falls
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
-
-    }
+    </div>
 </div>

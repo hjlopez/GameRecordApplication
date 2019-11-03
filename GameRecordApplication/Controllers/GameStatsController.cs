@@ -12,18 +12,37 @@ namespace GameRecordApplication.Controllers
     public class GameStatsController : Controller
     {
         IRepository<Game> game;
+        IRepository<Season> season;
 
-        public GameStatsController(IRepository<Game> game)
+        public GameStatsController(IRepository<Game> game, IRepository<Season> season)
         {
             this.game = game;
+            this.season = season;
         }
 
         // GET: GameStats
-        public ActionResult Index(string Category = "")
+        public ActionResult Index(string Category = "", bool ShowMessage = false, string Message = "", bool IsErrorMessage = false)
         {
             List<Game> listGame;
+            MatchViewModel vmodel = new MatchViewModel();
+            List<Season> seasons;
+            IEnumerable<long> gameId;
+            ViewBag.SuccessMessage = "";
 
+            if (ShowMessage)
+            {
+                ViewBag.SuccessMessage = Message;
+            }
+
+            vmodel.IsErrorMessage = IsErrorMessage;
             listGame = game.Collection().ToList();
+
+            if (Category != "")
+            {
+                gameId = listGame.Where(a => a.GameName == Category).Select(a => a.GameId);
+            }
+            seasons = season.Collection().ToList();
+            //vmodel.ListofSeasons = seasons.Where(a => a.GameId == gameId);
 
             //if (Category == null)
             //{
@@ -34,7 +53,7 @@ namespace GameRecordApplication.Controllers
             //    listGame = game.Collection().Where(p => p.GameName == Category).ToList();
             //}
 
-            MatchViewModel vmodel = new MatchViewModel();
+
             vmodel.ListOfGames = listGame;
             return View(vmodel);
         }

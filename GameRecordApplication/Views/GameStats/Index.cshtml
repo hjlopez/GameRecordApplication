@@ -1,7 +1,29 @@
 ﻿@model GameRecordApplication.ViewModels.MatchViewModel
 @{
+    /**/
+
     ViewBag.Title = "Index";
+
 }
+
+@if (@ViewBag.SuccessMessage != "")
+{
+    <br />
+    if (Model.IsErrorMessage)
+    {
+        <div class="alert alert-danger" role="alert" data-dismiss="alert">
+            @ViewBag.SuccessMessage
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success" role="alert" data-dismiss="alert">
+            @ViewBag.SuccessMessage
+        </div>
+    }
+
+}
+
 
 <br /><br />
 
@@ -16,11 +38,11 @@
     </div>
     @if (Request["Category"] == null)
     {
-        <a class="btn btn-success disabled" href="@Url.Action("Create","Match",new { Category = Request["Category"] })">New Entry</a>
+        <a class="btn btn-success disabled" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
     }
     else
     {
-        <a class="btn btn-success" href="@Url.Action("Create","Match",new { Category = Request["Category"] })">New Entry</a>
+        <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
     }
 
 </div>
@@ -31,7 +53,8 @@
     {
         if (Request.Params["Category"] == game.GameName && game.HasSeason)
         {
-            <a class="btn btn-primary" data-target="#myModal" data-toggle="modal">Season</a>
+            <a class="btn btn-primary" data-target="#filter" data-toggle="modal">Filter by Season</a>
+            <a class="btn btn-primary" data-target="#addSeason" data-toggle="modal">Add Season</a>
         }
     }
     @if (Model.ListOfMatches != null)
@@ -69,18 +92,69 @@
 
 </div>
 
-<div class="modal" id="myModal" role="dialog">
+@* Edit modal - 20191029 *@
+<div class="modal fade" id="filter" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4>asd</h4>
+                <h4>Filter by Season</h4>
             </div>
             <div class="modal-body">
-                Gravity Falls
+                @*@if(Model.ListofSeasons.Count() != 0)
+                    {
+                        <div class="form-group">
+                            <div class="col-md-10">
+
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>Current Season: 0</p>
+                    }*@
+
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="addSeason" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Add Season to @Request.Params["Category"]</h4>
+            </div>
+            <div class="modal-body">
+                @if (Model.ListOfSeasons == null)
+                {
+                    <p>Latest Season: 0</p>
+                }
+                else
+                {
+                    <p>Latest Season: </p>
+                }
+
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Create", "Season", new { Category = Request["Category"] }, FormMethod.Post))
+                {
+                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                    @*<a class="btn btn-success success" type="submit" href="@Url.Action("Create","Season",new { Category = Request["Category"] })">New Entry</a>*@
+                    <button class="btn btn-success success" type="submit">New Entry</button>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<style>
+</style>

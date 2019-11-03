@@ -9,5 +9,6 @@ namespace GameRecordApplication.Models
     {
         public long SeasonNumber { get; set; }
         public long GameId { get; set; }
+        public bool Active { get; set; }
     }
 }

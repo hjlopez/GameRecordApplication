@@ -207,6 +207,7 @@
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
+    <Compile Include="Controllers\SeasonController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -246,6 +247,10 @@
     <Compile Include="Migrations\201910271048266_a.cs" />
     <Compile Include="Migrations\201910271048266_a.Designer.cs">
       <DependentUpon>201910271048266_a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911020536081_AddActiveColumn_Seasons.cs" />
+    <Compile Include="Migrations\201911020536081_AddActiveColumn_Seasons.Designer.cs">
+      <DependentUpon>201911020536081_AddActiveColumn_Seasons.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Game.cs" />
@@ -338,6 +343,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\" />
+    <Folder Include="Views\Season\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -379,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910271048266_a.resx">
       <DependentUpon>201910271048266_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911020536081_AddActiveColumn_Seasons.resx">
+      <DependentUpon>201911020536081_AddActiveColumn_Seasons.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

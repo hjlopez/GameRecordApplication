@@ -12,10 +12,12 @@ namespace GameRecordApplication.Controllers
     public class MatchController : Controller
     {
         IRepository<Game> context;
+        IRepository<Season> Iseason;
 
-        public MatchController(IRepository<Game> game)
+        public MatchController(IRepository<Game> game, IRepository<Season> season)
         {
             this.context = game;
+            this.Iseason = season;
         }
 
         // GET: Match
@@ -34,10 +36,17 @@ namespace GameRecordApplication.Controllers
         public ActionResult Create(string Category = null)
         {
             List<Game> game = context.Collection().ToList();
-            MatchViewModel viewModel = new MatchViewModel();
+            List<Season> season = Iseason.Collection().ToList();
 
-            viewModel.ListOfGames = game;
-            return View();
+            MatchViewModel viewModel = new MatchViewModel
+            {
+                ListOfGames = game,
+                Game = game.First(a => a.GameName == Category)
+            };
+
+            viewModel.ListOfSeasons = season.Where(a => a.GameId == viewModel.Game.GameId).OrderBy(a => a.SeasonNumber);
+
+            return View(viewModel);
         }
 
         // POST: Match/Create

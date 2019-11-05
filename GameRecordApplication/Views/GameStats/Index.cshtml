@@ -5,7 +5,6 @@
     ViewBag.Title = "Index";
 
 }
-
 @if (@ViewBag.SuccessMessage != "")
 {
     <br />
@@ -24,9 +23,7 @@
 
 }
 
-
 <br /><br />
-
 <div class="col-md-2">
     <h4>Filter by Games</h4>
     <div class="list-group">
@@ -44,9 +41,7 @@
     {
         <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
     }
-
 </div>
-
 
 <div class="col-md-10">
     @foreach (var game in Model.ListOfGames)
@@ -84,14 +79,11 @@
                         </div>
                     </div>
                 }
-
             </div>
 
         }
     }
-
 </div>
-
 @* Edit modal - 20191029 *@
 <div class="modal fade" id="filter" role="dialog">
     <div class="modal-dialog">
@@ -112,7 +104,6 @@
                     {
                         <p>Current Season: 0</p>
                     }*@
-
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -122,7 +113,6 @@
     </div>
 </div>
 
-
 <div class="modal fade" id="addSeason" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -130,31 +120,34 @@
                 <h4>Add Season to @Request.Params["Category"]</h4>
             </div>
             <div class="modal-body">
-                @if (Model.ListOfSeasons == null)
+                @{long season = 0; }
+                @if (Model.ListOfSeasons == null || Request.Params["Category"] == "" || Request.Params["Category"] == null)
                 {
-                    <p>Latest Season: 0</p>
+                    { season = 0; }
+
                 }
                 else
                 {
-                    <p>Latest Season: </p>
+                    var games = Model.ListOfGames.First(a => a.GameName == Request.Params["Category"].ToString());
+                    var lseason = Model.ListOfSeasons.Where(a => a.GameId == games.GameId).ToList();
+                    { season = lseason.Count(); }
                 }
 
+                <p>Latest Season: @season</p>
             </div>
             <div class="modal-footer">
-                @using (Html.BeginForm("Create", "Season", new { Category = Request["Category"] }, FormMethod.Post))
+                @using (Html.BeginForm("Create", "Season", new { Category = Request["Category"], GameSeason = season + 1 }, FormMethod.Post))
                 {
                     <button class="btn btn-danger" data-dismiss="modal">Close</button>
                     @*<a class="btn btn-success success" type="submit" href="@Url.Action("Create","Season",new { Category = Request["Category"] })">New Entry</a>*@
-                    <button class="btn btn-success success" type="submit">New Entry</button>
+                    <button class="btn btn-success success" type="submit">New Season</button>
                 }
-
             </div>
         </div>
     </div>
 </div>
 
 
-
-
 <style>
+
 </style>

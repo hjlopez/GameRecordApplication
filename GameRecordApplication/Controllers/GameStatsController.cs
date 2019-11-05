@@ -25,7 +25,6 @@ namespace GameRecordApplication.Controllers
         {
             List<Game> listGame;
             MatchViewModel vmodel = new MatchViewModel();
-            List<Season> seasons;
             IEnumerable<long> gameId;
             ViewBag.SuccessMessage = "";
 
@@ -41,7 +40,7 @@ namespace GameRecordApplication.Controllers
             {
                 gameId = listGame.Where(a => a.GameName == Category).Select(a => a.GameId);
             }
-            seasons = season.Collection().ToList();
+            vmodel.ListOfSeasons = season.Collection();
             //vmodel.ListofSeasons = seasons.Where(a => a.GameId == gameId);
 
             //if (Category == null)

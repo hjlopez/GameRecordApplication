@@ -11,10 +11,12 @@ namespace GameRecordApplication.Controllers
     public class SeasonController : Controller
     {
         IRepository<Season> repository;
+        IRepository<Game> Igame;
 
-        public SeasonController(IRepository<Season> season)
+        public SeasonController(IRepository<Season> season, IRepository<Game> game)
         {
             this.repository = season;
+            this.Igame = game;
         }
 
         // GET: Season
@@ -37,15 +39,22 @@ namespace GameRecordApplication.Controllers
 
         // POST: Season/Create
         [HttpPost]
-        public ActionResult Create(Season season, string Category = null)
+        public ActionResult Create(Season season, string Category = null, long GameSeason = 0)
         {
+
             if (!ModelState.IsValid)
             {
                 //return View("Index");
-                return RedirectToAction("Index", "GameStats", new { Category = "Billiards" , ShowMessage = true, Message = "Error on Adding", IsErrorMessage = true });
+                return RedirectToAction("Index", "GameStats", new { Category = "Billiards", ShowMessage = true, Message = "Error on Adding", IsErrorMessage = true });
             }
             else
             {
+                // get game info
+                var game = Igame.Collection().First(a => a.GameName == Category);
+
+                season.SeasonNumber = GameSeason;
+                season.GameId = game.GameId;
+
                 repository.Insert(season);
                 repository.Commit();
 

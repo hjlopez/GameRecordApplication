@@ -32,11 +32,18 @@ namespace GameRecordApplication.Controllers
             return View();
         }
 
+       
         // GET: Match/Create
-        public ActionResult Create(string Category = null)
+        public ActionResult Create(FormCollection collection, string Category = null, bool weaponReq = false)
         {
             List<Game> game = context.Collection().ToList();
             List<Season> season = Iseason.Collection().ToList();
+
+            if (!string.IsNullOrEmpty(collection["weaponReq"]))
+            {
+                string checkResp = collection["weaponReq"];
+                bool checkRespB = Convert.ToBoolean(checkResp);
+            }
 
             MatchViewModel viewModel = new MatchViewModel
             {

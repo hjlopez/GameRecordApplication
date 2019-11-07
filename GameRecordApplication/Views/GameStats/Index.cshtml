@@ -22,7 +22,6 @@
     }
 
 }
-
 <br /><br />
 <div class="col-md-2">
     <h4>Filter by Games</h4>
@@ -33,16 +32,21 @@
             @Html.ActionLink(game.GameName, "Index", new { Category = game.GameName }, new { @class = Request["Category"] == game.GameName ? "list-group-item active" : "list-group-item" })
         }
     </div>
-    @if (Request["Category"] == null)
+    @if (Request["Category"] != null)
     {
-        <a class="btn btn-success disabled" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
-    }
-    else
-    {
-        <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
+        var team = Model.ListOfGames.First(a => a.GameName == Request.Params["Category"].ToString());
+        if (team.IsTeamGame)
+        {
+            <a class="btn btn-success" data-target="#teamSettings" data-toggle="modal">New Entry</a>
+        }
+        else
+        {
+            @*<a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>*@
+            <a class="btn btn-success" data-target="#individualSettings" data-toggle="modal">New Entry</a>
+        }
+
     }
 </div>
-
 <div class="col-md-10">
     @foreach (var game in Model.ListOfGames)
     {
@@ -112,7 +116,7 @@
         </div>
     </div>
 </div>
-
+@* Season Modal *@
 <div class="modal fade" id="addSeason" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -132,7 +136,6 @@
                     var lseason = Model.ListOfSeasons.Where(a => a.GameId == games.GameId).ToList();
                     { season = lseason.Count(); }
                 }
-
                 <p>Latest Season: @season</p>
             </div>
             <div class="modal-footer">
@@ -146,8 +149,50 @@
         </div>
     </div>
 </div>
+@* Team modal *@
+<div class="modal fade" id="teamSettings" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Team Game Settings</h4>
+            </div>
+            <div class="modal-body">
+                <p>All players are on the same team? </p>
+            </div>
+            <div class="modal-footer">
+                @using (Html.BeginForm("Create", "Season", new { Category = Request["Category"], GameSeason = season + 1 }, FormMethod.Post))
+                {
+                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                    @*<a class="btn btn-success success" type="submit" href="@Url.Action("Create","Season",new { Category = Request["Category"] })">New Entry</a>*@
+                    <button class="btn btn-success success" type="submit">Continue</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@* Individual modal *@
+<div class="modal fade" id="individualSettings" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Individual Game Settings</h4>
+            </div>
+            
+                <div class="modal-body">
 
+                </div>
+                <div class="modal-footer">
+                    
+                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                    @*<a class="btn btn-success success" type="submit" href="@Url.Action("Create","Match",new { collection = this, Category = Request["Category"]})">New Entry</a>*@
+                    <button class="btn btn-success success" type="submit">Continue</button>
+                   
+                </div>
+            
 
+        </div>
+    </div>
+</div>
 <style>
 
 </style>

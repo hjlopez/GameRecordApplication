@@ -25,5 +25,8 @@ namespace GameRecordApplication.Models
 
         [DisplayName("Has Season?")]
         public bool HasSeason { get; set; }
+
+        [DisplayName("Team Game?")]
+        public bool IsTeamGame { get; set; }
     }
 }

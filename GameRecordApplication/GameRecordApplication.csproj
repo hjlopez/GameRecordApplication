@@ -252,6 +252,10 @@
     <Compile Include="Migrations\201911020536081_AddActiveColumn_Seasons.Designer.cs">
       <DependentUpon>201911020536081_AddActiveColumn_Seasons.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911070240509_IsTeamGame_Column_Games.cs" />
+    <Compile Include="Migrations\201911070240509_IsTeamGame_Column_Games.Designer.cs">
+      <DependentUpon>201911070240509_IsTeamGame_Column_Games.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameTypes.cs" />
@@ -388,6 +392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911020536081_AddActiveColumn_Seasons.resx">
       <DependentUpon>201911020536081_AddActiveColumn_Seasons.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911070240509_IsTeamGame_Column_Games.resx">
+      <DependentUpon>201911070240509_IsTeamGame_Column_Games.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

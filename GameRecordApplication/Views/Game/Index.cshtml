@@ -23,6 +23,9 @@
         <th>
             @Html.DisplayName("Season?")
         </th>
+        <th>
+            @Html.DisplayName("Team Game?")
+        </th>
         <th></th>
     </tr>
 
@@ -44,8 +47,11 @@
                     @Html.DisplayFor(modelItem => item.HasSeason)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new {  id=item.GameId  }) |
-                    @Html.ActionLink("Delete", "Delete", new {  id=item.GameId })
+                    @Html.DisplayFor(modelItem => item.IsTeamGame)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.GameId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.GameId })
                 </td>
             </tr>
         }

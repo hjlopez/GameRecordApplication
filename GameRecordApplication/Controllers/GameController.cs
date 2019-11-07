@@ -102,6 +102,7 @@ namespace GameRecordApplication.Controllers
                 gameToEdit.GameType = games.Game.GameType;
                 gameToEdit.MaxPlayers = games.Game.MaxPlayers;
                 gameToEdit.HasSeason = games.Game.HasSeason;
+                gameToEdit.IsTeamGame = games.Game.IsTeamGame;
 
                 context.Commit();
 

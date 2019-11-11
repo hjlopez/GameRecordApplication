@@ -200,6 +200,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DotaHeroController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameStatsController.cs" />
     <Compile Include="Controllers\GameTypeController.cs" />
@@ -257,6 +258,7 @@
       <DependentUpon>201911070240509_IsTeamGame_Column_Games.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DotaHero.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameTypes.cs" />
     <Compile Include="Models\Season.cs" />
@@ -343,6 +345,7 @@
     <Content Include="Views\Game\Edit.cshtml" />
     <Content Include="Views\Game\Delete.cshtml" />
     <Content Include="Views\Match\Create.cshtml" />
+    <Content Include="Views\DotaHero\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<GameRecordApplication.Models.DotaHero>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("Game Type")
+        </th>
+        <th>
+            @Html.DisplayName("Max Players")
+        </th>
+        <th>
+            @Html.DisplayName("Season?")
+        </th>
+        <th>
+            @Html.DisplayName("Team Game?")
+        </th>
+        <th></th>
+    </tr>
+
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Localized_name)
+            </td>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>*@
+
+        @*<dt>
+            @Html.DisplayFor(model => item.Localized_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => item.Localized_name)
+        </dd>*@
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Primary_attr)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Primary_attr)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Attack_type)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Attack_type)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Legs)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Legs)
+            </dd>*@
+
+
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+         </td>
+      </tr>
+        
+   }
+
+</table>

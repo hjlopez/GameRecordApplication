@@ -15,6 +15,7 @@ namespace GameRecordApplication.ViewModels
         public IEnumerable<Game> ListOfGames { get; set; }
         public IEnumerable<Match> ListOfMatches { get; set; }
         public IEnumerable<Season> ListOfSeasons { get; set; }
+        public IEnumerable<User> ListOfUsers { get; set; }
 
         public bool IsErrorMessage { get; set; }
     }

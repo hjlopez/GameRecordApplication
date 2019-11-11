@@ -13,11 +13,13 @@ namespace GameRecordApplication.Controllers
     {
         IRepository<Game> context;
         IRepository<Season> Iseason;
+        IRepository<User> Iuser;
 
-        public MatchController(IRepository<Game> game, IRepository<Season> season)
+        public MatchController(IRepository<Game> game, IRepository<Season> season, IRepository<User> user)
         {
             this.context = game;
             this.Iseason = season;
+            this.Iuser = user;
         }
 
         // GET: Match
@@ -34,24 +36,24 @@ namespace GameRecordApplication.Controllers
 
        
         // GET: Match/Create
-        public ActionResult Create(FormCollection collection, string Category = null, bool weaponReq = false)
+        public ActionResult Create(string Category = null, bool weaponReq = false)
         {
-            List<Game> game = context.Collection().ToList();
-            List<Season> season = Iseason.Collection().ToList();
+            List<Game> games = context.Collection().ToList();
+            List<Season> seasons = Iseason.Collection().ToList();
+            List<User> users = Iuser.Collection().ToList();
 
-            if (!string.IsNullOrEmpty(collection["weaponReq"]))
-            {
-                string checkResp = collection["weaponReq"];
-                bool checkRespB = Convert.ToBoolean(checkResp);
-            }
+            // add N/A 
+            users.Add(new User { FirstName = "N/A", UserId = "0" });
 
             MatchViewModel viewModel = new MatchViewModel
             {
-                ListOfGames = game,
-                Game = game.First(a => a.GameName == Category)
+                ListOfGames = games,
+                ListOfUsers = users.OrderBy(a => a.UserId),
+                Game = games.First(a => a.GameName == Category)
             };
 
-            viewModel.ListOfSeasons = season.Where(a => a.GameId == viewModel.Game.GameId).OrderBy(a => a.SeasonNumber);
+            viewModel.ListOfSeasons = seasons.Where(a => a.GameId == viewModel.Game.GameId).OrderBy(a => a.SeasonNumber);
+            
 
             return View(viewModel);
         }

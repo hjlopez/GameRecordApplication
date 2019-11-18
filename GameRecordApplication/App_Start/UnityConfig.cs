@@ -50,6 +50,7 @@ namespace GameRecordApplication
             container.RegisterType<IRepository<Game>, SQLRepository<Game>>();
             container.RegisterType<IRepository<Season>, SQLRepository<Season>>();
             container.RegisterType<IRepository<Match>, SQLRepository<Match>>();
+            container.RegisterType<IRepository<DotaHeroAttribute>, SQLRepository<DotaHeroAttribute>>();
         }
     }
 }

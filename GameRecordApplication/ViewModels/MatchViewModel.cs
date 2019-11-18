@@ -12,6 +12,7 @@ namespace GameRecordApplication.ViewModels
         public User User { get; set; }
         public Match Match { get; set; }
         public Season Season { get; set; }
+        public DotaHero DotaHero { get; set; }
         public IEnumerable<Game> ListOfGames { get; set; }
         public IEnumerable<Match> ListOfMatches { get; set; }
         public IEnumerable<Season> ListOfSeasons { get; set; }

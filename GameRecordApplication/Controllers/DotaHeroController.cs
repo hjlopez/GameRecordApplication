@@ -12,7 +12,7 @@ namespace GameRecordApplication.Controllers
     {
         public ActionResult Index()
         {
-            IEnumerable<DotaHero> students = null;
+            IEnumerable<DotaHero> dotaHero = null;
 
             using (var client = new HttpClient())
             {
@@ -27,19 +27,19 @@ namespace GameRecordApplication.Controllers
                     var readTask = result.Content.ReadAsAsync<IList<DotaHero>>();
                     readTask.Wait();
 
-                    students = readTask.Result;
+                    dotaHero = readTask.Result;
                 }
                 else //web api sent error response 
                 {
                     //log response status here..
 
-                    students = Enumerable.Empty<DotaHero>();
+                    dotaHero = Enumerable.Empty<DotaHero>();
 
                     ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
                 }
             }
             
-            return View(students.ToList());
+            return View(dotaHero.ToList());
         }
     }
 }

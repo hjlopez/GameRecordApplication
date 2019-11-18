@@ -1,0 +1,101 @@
+﻿@model GameRecordApplication.ViewModels.HeroViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2></h2>
+
+<div class="col-md-2">
+    <h3>Hero Menu</h3>
+    <div class="list-group">
+        @Html.ActionLink("Hero Pool", "Index", null, new { @class = Request["Category"] == null || Request["Category"] == "dota2" ? "list-group-item active" : "list-group-item" })
+        @Html.ActionLink("Attributes", "Index", null, new { Category = "attr" },new { @class = Request["Category"] == "attr" ? "list-group-item active" : "list-group-item" })
+    </div>
+</div>
+
+<div class="col-md-10">
+
+    @if (Request["Category"] == null || Request["Category"] == "dota2")
+    {
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>No.</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DotaHero.Localized_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DotaHero.Primary_attr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DotaHero.Attack_type)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var DotaHero in Model.DotaHeroes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => DotaHero.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => DotaHero.Localized_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => DotaHero.Primary_attr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => DotaHero.Attack_type)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = DotaHero.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+
+    }
+    else
+    {
+        <a class="btn btn-primary" href="@Url.Action("CreateAttr","Hero")">Add Attribute</a>
+        <br />
+        if (Model.DotaHeroAttributes != null)
+        {
+        <div>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DotaHeroAttribute.Attribute)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DotaHeroAttribute.Description)
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var DotaHeroAttr in Model.DotaHeroAttributes)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => DotaHeroAttr.Attribute)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => DotaHeroAttr.Description)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = DotaHeroAttr.AttributeId })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        }
+
+    }
+
+
+</div>

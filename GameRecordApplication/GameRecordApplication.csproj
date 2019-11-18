@@ -204,6 +204,7 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameStatsController.cs" />
     <Compile Include="Controllers\GameTypeController.cs" />
+    <Compile Include="Controllers\HeroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -257,8 +258,13 @@
     <Compile Include="Migrations\201911070240509_IsTeamGame_Column_Games.Designer.cs">
       <DependentUpon>201911070240509_IsTeamGame_Column_Games.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911181033410_DotaHeroAttr.cs" />
+    <Compile Include="Migrations\201911181033410_DotaHeroAttr.Designer.cs">
+      <DependentUpon>201911181033410_DotaHeroAttr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotaHero.cs" />
+    <Compile Include="Models\DotaHeroAttribute.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameTypes.cs" />
     <Compile Include="Models\Season.cs" />
@@ -269,6 +275,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Repository\SQLRepository.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\HeroViewModel.cs" />
     <Compile Include="ViewModels\MatchViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\IdentityModels.cs" />
@@ -346,6 +353,8 @@
     <Content Include="Views\Game\Delete.cshtml" />
     <Content Include="Views\Match\Create.cshtml" />
     <Content Include="Views\DotaHero\Index.cshtml" />
+    <Content Include="Views\Hero\Index.cshtml" />
+    <Content Include="Views\Hero\CreateAttribute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -398,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911070240509_IsTeamGame_Column_Games.resx">
       <DependentUpon>201911070240509_IsTeamGame_Column_Games.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911181033410_DotaHeroAttr.resx">
+      <DependentUpon>201911181033410_DotaHeroAttr.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

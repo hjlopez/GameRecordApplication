@@ -4,6 +4,9 @@
     ViewBag.Title = "Index";
 }
 
+@using PagedList.Mvc; 
+@using PagedList; 
+
 <h2></h2>
 
 <div class="col-md-2">
@@ -20,12 +23,19 @@
     {
 
         <p>
-            @Html.ActionLink("Create New", "Create")
+            @using (Html.BeginForm("Index", "Hero", FormMethod.Get))
+            {
+                <input type="text" name="search" placeholder="Search Hero.." />
+                <input type="submit" name="submit" value="Search" />
+            }
         </p>
 
+        
         <table class="table">
             <tr>
-                <th>No.</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DotaHero.Id)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.DotaHero.Localized_name)
                 </th>
@@ -38,7 +48,7 @@
                 <th></th>
             </tr>
             @foreach (var DotaHero in Model.DotaHeroes)
-            {
+             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => DotaHero.Id)
@@ -56,9 +66,10 @@
                         @Html.ActionLink("Details", "Details", new { id = DotaHero.Id })
                     </td>
                 </tr>
-            }
+             }
         </table>
 
+        @Html.PagedListPager(Model.DotaHeroes,i=>Url.Action("Index","Hero", new { i, search = Request.QueryString["search"] }))
     }
     else
     {
@@ -95,6 +106,7 @@
         </div>
         }
 
+        
     }
 
 

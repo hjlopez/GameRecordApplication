@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using PagedList.Mvc;
+using PagedList;
 
 namespace GameRecordApplication.Controllers
 {
@@ -19,7 +21,7 @@ namespace GameRecordApplication.Controllers
             this.dotaHeroAttr = dotaHeroAttr;
         }
         // GET: Hero
-        public ActionResult Index(string Category = "")
+        public ActionResult Index(int? i, string search = "", string Category = "")
         {
             HeroViewModel heroViewModel = new HeroViewModel();
             IEnumerable<DotaHero> dotaHero = null;
@@ -40,7 +42,7 @@ namespace GameRecordApplication.Controllers
                         readTask.Wait();
 
                         dotaHero = readTask.Result;
-                        heroViewModel.DotaHeroes = dotaHero.ToList();
+                        heroViewModel.DotaHeroes = dotaHero.Where(a => a.Localized_name.Contains(search) || search == null).ToList().ToPagedList(i ?? 1,10);
                     }
                     else //web api sent error response 
                     {
@@ -57,6 +59,13 @@ namespace GameRecordApplication.Controllers
             return View(heroViewModel);
         }
 
+        // search
+        public ActionResult Search(string search)
+        {
+            return View();
+        }
+
+        // attribute
         public ActionResult CreateAttr()
         {
             return View("CreateAttribute");

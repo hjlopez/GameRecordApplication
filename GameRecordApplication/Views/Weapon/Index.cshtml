@@ -1,0 +1,45 @@
+﻿@*@model IEnumerable<GameRecordApplication.ViewModels.MonsterHunterWeaponViewModel.Weapon>*@
+@model IPagedList<GameRecordApplication.ViewModels.MonsterHunterWeaponViewModel.Weapon>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<h2>Monster Hunter Weapons</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.name)*@
+            Weapon Name
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager(Model, i => Url.Action("Index", "Weapon", new { i, search = Request.QueryString["search"] }))

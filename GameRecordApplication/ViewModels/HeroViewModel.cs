@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PagedList.Mvc;
+using PagedList;
 
 namespace GameRecordApplication.ViewModels
 {
@@ -10,7 +12,7 @@ namespace GameRecordApplication.ViewModels
     {
         public DotaHero DotaHero { get; set; }
         public DotaHeroAttribute DotaHeroAttribute { get; set; }
-        public IEnumerable<DotaHero> DotaHeroes { get; set; }
+        public IPagedList<DotaHero> DotaHeroes { get; set; }
         public IEnumerable<DotaHeroAttribute> DotaHeroAttributes { get; set; }
     }
 }

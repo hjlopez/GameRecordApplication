@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using PagedList.Mvc;
 using PagedList;
+using System.ComponentModel;
 
 namespace GameRecordApplication.ViewModels
 {
@@ -100,6 +101,7 @@ namespace GameRecordApplication.ViewModels
         public class Weapon
         {
             public int id { get; set; }
+            [DisplayName("Weapon Name")]
             public string name { get; set; }
             public string type { get; set; }
             public int rarity { get; set; }

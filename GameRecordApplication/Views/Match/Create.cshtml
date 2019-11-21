@@ -3,7 +3,7 @@
     ViewBag.Title = "Create";
 }
 <h3>Insert Match Played</h3>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Match", new { Category = Request["Category"]} ,FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -48,52 +48,52 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DotaHero.Localized_name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DotaHero.Localized_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DotaHero.Localized_name, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                 @Html.ValidationMessageFor(model => model.DotaHero.Localized_name, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Weapon, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Weapon.name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Weapon, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Weapon, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Weapon.name, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Weapon.name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TeamWin, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Match.TeamWin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.TeamWin)
-                    @Html.ValidationMessageFor(model => model.TeamWin, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Match.TeamWin)
+                    @Html.ValidationMessageFor(model => model.Match.TeamWin, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Hours, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Match.Hours, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Hours, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Hours, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Match.Hours, new { htmlAttributes = new { @class = "form-control" , @disabled = "disabled"} })
+                @Html.ValidationMessageFor(model => model.Match.Hours, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Minutes, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Match.Minutes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Minutes, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Minutes, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Match.Minutes, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Match.Minutes, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Seconds, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Match.Seconds, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Seconds, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Seconds, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Match.Seconds, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Match.Seconds, "", new { @class = "text-danger" })
             </div>
-        </div>*@
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create New Match" class="btn btn-success" />

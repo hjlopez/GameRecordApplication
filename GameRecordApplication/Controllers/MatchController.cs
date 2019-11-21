@@ -11,15 +11,17 @@ namespace GameRecordApplication.Controllers
 {
     public class MatchController : Controller
     {
-        IRepository<Game> context;
+        IRepository<Game> game;
         IRepository<Season> Iseason;
         IRepository<User> Iuser;
+        IRepository<Match> Imatch;
 
-        public MatchController(IRepository<Game> game, IRepository<Season> season, IRepository<User> user)
+        public MatchController(IRepository<Game> game, IRepository<Season> season, IRepository<User> user, IRepository<Match> Imatch)
         {
-            this.context = game;
+            this.game = game;
             this.Iseason = season;
             this.Iuser = user;
+            this.Imatch = Imatch;
         }
 
         // GET: Match
@@ -38,7 +40,7 @@ namespace GameRecordApplication.Controllers
         // GET: Match/Create
         public ActionResult Create(string Category = null, bool weaponReq = false)
         {
-            List<Game> games = context.Collection().ToList();
+            List<Game> games = game.Collection().ToList();
             List<Season> seasons = Iseason.Collection().ToList();
             List<User> users = Iuser.Collection().ToList();
 
@@ -60,18 +62,15 @@ namespace GameRecordApplication.Controllers
 
         // POST: Match/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(MatchViewModel viewModel, string Category = "")
         {
-            try
-            {
-                // TODO: Add insert logic here
+            IEnumerable<Game> gameTemp;
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            gameTemp = game.Collection();
+            viewModel.Game = gameTemp.First(a => a.GameName == "Category");
+            viewModel.Match.GameId = viewModel.Game.GameId;
+
+            return View(viewModel);
         }
 
         // GET: Match/Edit/5

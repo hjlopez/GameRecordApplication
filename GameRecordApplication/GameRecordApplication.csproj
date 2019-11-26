@@ -273,6 +273,10 @@
     <Compile Include="Migrations\201911200003302_Required_DotaHeroAttr.Designer.cs">
       <DependentUpon>201911200003302_Required_DotaHeroAttr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911261323168_UpdateMatchDataType.cs" />
+    <Compile Include="Migrations\201911261323168_UpdateMatchDataType.Designer.cs">
+      <DependentUpon>201911261323168_UpdateMatchDataType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotaHero.cs" />
     <Compile Include="Models\DotaHeroAttribute.cs" />
@@ -427,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911200003302_Required_DotaHeroAttr.resx">
       <DependentUpon>201911200003302_Required_DotaHeroAttr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911261323168_UpdateMatchDataType.resx">
+      <DependentUpon>201911261323168_UpdateMatchDataType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

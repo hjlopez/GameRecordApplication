@@ -21,10 +21,10 @@ namespace GameRecordApplication.Models
         public long SeasonId { get; set; }
 
         [DisplayName("Winning Player")]
-        public long PlayerWin { get; set; }
+        public string PlayerWin { get; set; }
 
         [DisplayName("Losing Player")]
-        public long PlayerIdLose { get; set; }
+        public string PlayerIdLose { get; set; }
         public string Hero { get; set; }
         public string Weapon { get; set; }
 

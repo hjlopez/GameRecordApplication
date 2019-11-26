@@ -13,11 +13,13 @@ namespace GameRecordApplication.Controllers
     {
         IRepository<Game> game;
         IRepository<Season> season;
+        IRepository<Match> match;
 
-        public GameStatsController(IRepository<Game> game, IRepository<Season> season)
+        public GameStatsController(IRepository<Game> game, IRepository<Season> season, IRepository<Match> match)
         {
             this.game = game;
             this.season = season;
+            this.match = match;
         }
 
         // GET: GameStats
@@ -25,8 +27,10 @@ namespace GameRecordApplication.Controllers
         {
             List<Game> listGame;
             MatchViewModel vmodel = new MatchViewModel();
-            IEnumerable<long> gameId;
+            IEnumerable<long> gameIdList;
+            IEnumerable<Match> matches;
             ViewBag.SuccessMessage = "";
+            long gameId = 0;
 
             if (ShowMessage)
             {
@@ -35,25 +39,25 @@ namespace GameRecordApplication.Controllers
 
             vmodel.IsErrorMessage = IsErrorMessage;
             listGame = game.Collection().ToList();
+            matches = match.Collection().ToList();
+            
 
             if (Category != "")
             {
-                gameId = listGame.Where(a => a.GameName == Category).Select(a => a.GameId);
+                gameIdList = listGame.Where(a => a.GameName == Category).Select(a => a.GameId);
+
+                foreach (var id in gameIdList)
+                {
+                    gameId = id;
+                }
+
+                matches = matches.Where(a => a.GameId == gameId);
             }
             vmodel.ListOfSeasons = season.Collection();
-            //vmodel.ListofSeasons = seasons.Where(a => a.GameId == gameId);
-
-            //if (Category == null)
-            //{
-            //    listGame = game.Collection().ToList();
-            //}
-            //else
-            //{
-            //    listGame = game.Collection().Where(p => p.GameName == Category).ToList();
-            //}
-
 
             vmodel.ListOfGames = listGame;
+            vmodel.ListOfMatches = matches;
+
             return View(vmodel);
         }
 

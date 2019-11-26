@@ -62,15 +62,24 @@ namespace GameRecordApplication.Controllers
 
         // POST: Match/Create
         [HttpPost]
-        public ActionResult Create(MatchViewModel viewModel, string Category = "")
+        public ActionResult Create(MatchViewModel viewModel, string category = "")
         {
             IEnumerable<Game> gameTemp;
 
             gameTemp = game.Collection();
-            viewModel.Game = gameTemp.First(a => a.GameName == "Category");
+
+            viewModel.Match.SeasonId = Convert.ToInt64(Request.Form["Season"]);
+            viewModel.Match.PlayerWin = Request.Form["WinPlayer"];
+            viewModel.Match.PlayerIdLose = Request.Form["LossPlayer"];
+            viewModel.Game = gameTemp.First(a => a.GameName == category);
+
+            // insert to match
             viewModel.Match.GameId = viewModel.Game.GameId;
 
-            return View(viewModel);
+            Imatch.Insert(viewModel.Match);
+            Imatch.Commit();
+
+            return RedirectToAction("Index","GameStats",new { Category = category });
         }
 
         // GET: Match/Edit/5

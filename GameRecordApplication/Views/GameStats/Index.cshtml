@@ -23,51 +23,55 @@
 
 }
 <br /><br />
-<div class="col-md-2">
-    <h4>Filter by Games</h4>
-    <div class="list-group">
-        @Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
-        @foreach (var game in Model.ListOfGames)
-        {
-            @Html.ActionLink(game.GameName, "Index", new { Category = game.GameName }, new { @class = Request["Category"] == game.GameName ? "list-group-item active" : "list-group-item" })
-        }
-    </div>
-    @if (Request["Category"] != null)
-    {
-        var team = Model.ListOfGames.First(a => a.GameName == Request.Params["Category"].ToString());
-        if (team.IsTeamGame)
-        {
-            <a class="btn btn-success" data-target="#teamSettings" data-toggle="modal">New Entry</a>
-        }
-        else
-        {
-            <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
-            @*<a class="btn btn-success" data-target="#individualSettings" data-toggle="modal">New Entry</a>*@
-        }
+      <div class="col-md-2">
+          <h4>Filter by Games</h4>
+          <div class="list-group">
+              @Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
+              @foreach (var game in Model.ListOfGames)
+              {
+                  @Html.ActionLink(game.GameName, "Index", new { Category = game.GameName }, new { @class = Request["Category"] == game.GameName ? "list-group-item active" : "list-group-item"})
+              }
+          </div>
+          @if (Request["Category"] != null && Request["Category"] == "Billiards")
+          {
+              <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
 
-    }
-</div>
+              @*var team = Model.ListOfGames.First(a => a.GameName == Request.Params["Category"].ToString());
+              if (team.IsTeamGame)
+              {
+                  <a class="btn btn-success" data-target="#teamSettings" data-toggle="modal">New Entry</a>
+              }
+              else
+              {
+                  <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
+              }*@
+
+          }
+      </div>
 <div class="col-md-10">
     @foreach (var game in Model.ListOfGames)
     {
         if (Request.Params["Category"] == game.GameName && game.HasSeason)
         {
-            <a class="btn btn-primary" data-target="#filter" data-toggle="modal">Filter by Season</a>
-            <a class="btn btn-primary" data-target="#addSeason" data-toggle="modal">Add Season</a>
+            <div>
+                <a class="btn btn-primary" data-target="#filter" data-toggle="modal">Filter by Season</a>
+                <a class="btn btn-primary" data-target="#addSeason" data-toggle="modal">Add Season</a>
+            </div>
+            <br />
         }
     }
     @if (Model.ListOfMatches != null)
     {
-        for (int i = 1; i < Model.ListOfMatches.Count(); i++)
+        for (int i = 1; i <= Model.ListOfMatches.Count(); i++)
         {
             <div class="row">
                 <br />
-                <div class="col-sm-6 table-bordered">
+                <div class="col-sm-6 table-bordered" >
                     <div class="card ">
                         <div class="card-body ">
                             <h5 class="card-title">Special title treatment</h5>
                             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <a href="#" class="btn btn-primary link">Go somewhere</a>
                         </div>
                     </div>
                 </div>
@@ -78,7 +82,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                <a href="#" class="btn btn-primary link">Go somewhere</a>
                             </div>
                         </div>
                     </div>
@@ -87,6 +91,7 @@
 
         }
     }
+
 </div>
 @* Edit modal - 20191029 *@
 <div class="modal fade" id="filter" role="dialog">
@@ -194,5 +199,16 @@
     </div>
 </div>
 <style>
+    .table-bordered{
+        /*border: solid;*/
+        
+    }
 
+    .link{
+        margin-bottom: 4px;
+    }
+
+    .card-title{
+        font-weight: bold;
+    }
 </style>

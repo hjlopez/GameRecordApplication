@@ -23,7 +23,7 @@
                 @Html.Label("Season", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.ListOfSeasons,
-                  new SelectList(Model.ListOfSeasons, "SeasonNumber", "SeasonNumber"), new { htmlAttributes = new { @class = "form-control" } })
+                  new SelectList(Model.ListOfSeasons, "SeasonNumber", "SeasonNumber"), new { htmlAttributes = new { @class = "form-control" }, Name = "Season" })
                 </div>
             </div>
         }
@@ -33,7 +33,7 @@
             @Html.Label("Winning Player", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.ListOfUsers,
-                 new SelectList(Model.ListOfUsers, "UserId", "FirstName"), new { htmlAttributes = new { @class = "form-control" } })
+                 new SelectList(Model.ListOfUsers, "UserId", "FirstName"), new { htmlAttributes = new { @class = "form-control" }, Name = "WinPlayer" })
             </div>
         </div>
 
@@ -41,7 +41,7 @@
             @Html.Label("Losing Player", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.ListOfUsers,
-                 new SelectList(Model.ListOfUsers, "UserId", "FirstName"), new { htmlAttributes = new { @class = "form-control" } })
+                 new SelectList(Model.ListOfUsers, "UserId", "FirstName"), new { htmlAttributes = new { @class = "form-control" }, Name = "LossPlayer" })
             </div>
         </div>
 

@@ -4,7 +4,12 @@
 
     ViewBag.Title = "Index";
 
+
 }
+
+@using PagedList.Mvc;
+@using PagedList;
+
 @if (@ViewBag.SuccessMessage != "")
 {
     <br />
@@ -23,31 +28,31 @@
 
 }
 <br /><br />
-      <div class="col-md-2">
-          <h4>Filter by Games</h4>
-          <div class="list-group">
-              @Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
-              @foreach (var game in Model.ListOfGames)
-              {
-                  @Html.ActionLink(game.GameName, "Index", new { Category = game.GameName }, new { @class = Request["Category"] == game.GameName ? "list-group-item active" : "list-group-item"})
-              }
-          </div>
-          @if (Request["Category"] != null && Request["Category"] == "Billiards")
-          {
-              <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
+<div class="col-md-2">
+    <h4>Filter by Games</h4>
+    <div class="list-group">
+        @Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })
+        @foreach (var game in Model.ListOfGames)
+        {
+            @Html.ActionLink(game.GameName, "Index", new { Category = game.GameName }, new { @class = Request["Category"] == game.GameName ? "list-group-item active" : "list-group-item" })
+        }
+    </div>
+    @if (Request["Category"] != null && Request["Category"] == "Billiards")
+    {
+        <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
 
-              @*var team = Model.ListOfGames.First(a => a.GameName == Request.Params["Category"].ToString());
-              if (team.IsTeamGame)
-              {
-                  <a class="btn btn-success" data-target="#teamSettings" data-toggle="modal">New Entry</a>
-              }
-              else
-              {
-                  <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
-              }*@
+        @*var team = Model.ListOfGames.First(a => a.GameName == Request.Params["Category"].ToString());
+            if (team.IsTeamGame)
+            {
+                <a class="btn btn-success" data-target="#teamSettings" data-toggle="modal">New Entry</a>
+            }
+            else
+            {
+                <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
+            }*@
 
-          }
-      </div>
+    }
+</div>
 <div class="col-md-10">
     @foreach (var game in Model.ListOfGames)
     {
@@ -60,36 +65,43 @@
             <br />
         }
     }
+
     @if (Model.ListOfMatches != null)
     {
-        for (int i = 1; i <= Model.ListOfMatches.Count(); i++)
+        for (int i = 0; i < Model.ListOfMatches.Count(); i++)
         {
             <div class="row">
                 <br />
-                <div class="col-sm-6 table-bordered" >
+                <div class="col-sm-6 table-bordered">
                     <div class="card ">
                         <div class="card-body ">
-                            <h5 class="card-title">Special title treatment</h5>
+                            @* Display player names *@
+                            <h5 class="card-title">@Model.ListOfUsers.FirstOrDefault(user => user.UserId == Model.ListOfMatches.ElementAt(i).PlayerWin).FirstName  vs @Model.ListOfUsers.FirstOrDefault(user => user.UserId == Model.ListOfMatches.ElementAt(i).PlayerIdLose).FirstName</h5>
                             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                             <a href="#" class="btn btn-primary link">Go somewhere</a>
                         </div>
                     </div>
                 </div>
-                @if (Model.ListOfMatches.Count() > 1)
+                @{ i++;}
+
+                @if (Model.ListOfMatches.Count() != i)
                 {
                     <div class="col-sm-6 table-bordered">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
+                                <h5 class="card-title">@Model.ListOfUsers.FirstOrDefault(user => user.UserId == Model.ListOfMatches.ElementAt(i).PlayerWin).FirstName  vs @Model.ListOfUsers.FirstOrDefault(user => user.UserId == Model.ListOfMatches.ElementAt(i).PlayerIdLose).FirstName</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <a href="#" class="btn btn-primary link">Go somewhere</a>
                             </div>
                         </div>
                     </div>
-                }
-            </div>
 
+                }
+
+            </div>
         }
+        @Html.PagedListPager(Model.ListOfMatches, i => Url.Action("Index", "GameStats", new {  Category = Request.Params["Category"], i }))
+        @*@Html.PagedListPager(Model.ListOfMatches, i => Url.Action("Index", "GameStats", new { i, search = Request.QueryString["search"] }))*@
     }
 
 </div>
@@ -182,33 +194,32 @@
             <div class="modal-header">
                 <h4>Individual Game Settings</h4>
             </div>
-            
-                <div class="modal-body">
 
-                </div>
-                <div class="modal-footer">
-                    
-                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
-                    @*<a class="btn btn-success success" type="submit" href="@Url.Action("Create","Match",new { collection = this, Category = Request["Category"]})">New Entry</a>*@
-                    <button class="btn btn-success success" type="submit">Continue</button>
-                   
-                </div>
-            
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+
+                <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                @*<a class="btn btn-success success" type="submit" href="@Url.Action("Create","Match",new { collection = this, Category = Request["Category"]})">New Entry</a>*@
+                <button class="btn btn-success success" type="submit">Continue</button>
+
+            </div>
+
 
         </div>
     </div>
 </div>
 <style>
-    .table-bordered{
+    .table-bordered {
         /*border: solid;*/
-        
     }
 
-    .link{
+    .link {
         margin-bottom: 4px;
     }
 
-    .card-title{
+    .card-title {
         font-weight: bold;
     }
 </style>

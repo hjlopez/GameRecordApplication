@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using static GameRecordApplication.ViewModels.MonsterHunterWeaponViewModel;
+using PagedList.Mvc;
+using PagedList;
 
 namespace GameRecordApplication.ViewModels
 {
@@ -16,7 +18,7 @@ namespace GameRecordApplication.ViewModels
         public DotaHero DotaHero { get; set; }
         public Weapon Weapon   { get; set; }
         public IEnumerable<Game> ListOfGames { get; set; }
-        public IEnumerable<Match> ListOfMatches { get; set; }
+        public IPagedList<Match> ListOfMatches { get; set; }
         public IEnumerable<Season> ListOfSeasons { get; set; }
         public IEnumerable<User> ListOfUsers { get; set; }
         public IEnumerable<Weapon> ListOfWeapons { get; set; }

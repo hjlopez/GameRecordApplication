@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList.Mvc;
+using PagedList;
 
 namespace GameRecordApplication.Controllers
 {
@@ -14,21 +16,24 @@ namespace GameRecordApplication.Controllers
         IRepository<Game> game;
         IRepository<Season> season;
         IRepository<Match> match;
+        IRepository<User> user;
 
-        public GameStatsController(IRepository<Game> game, IRepository<Season> season, IRepository<Match> match)
+        public GameStatsController(IRepository<Game> game, IRepository<Season> season, IRepository<Match> match, IRepository<User> user)
         {
             this.game = game;
             this.season = season;
             this.match = match;
+            this.user = user;
         }
 
         // GET: GameStats
-        public ActionResult Index(string Category = "", bool ShowMessage = false, string Message = "", bool IsErrorMessage = false)
+        public ActionResult Index(int? i, string Category = "", bool ShowMessage = false, string Message = "", bool IsErrorMessage = false)
         {
             List<Game> listGame;
             MatchViewModel vmodel = new MatchViewModel();
             IEnumerable<long> gameIdList;
             IEnumerable<Match> matches;
+            IEnumerable<User> users;
             ViewBag.SuccessMessage = "";
             long gameId = 0;
 
@@ -40,7 +45,7 @@ namespace GameRecordApplication.Controllers
             vmodel.IsErrorMessage = IsErrorMessage;
             listGame = game.Collection().ToList();
             matches = match.Collection().ToList();
-            
+            vmodel.ListOfUsers = user.Collection().ToList();
 
             if (Category != "")
             {
@@ -56,7 +61,7 @@ namespace GameRecordApplication.Controllers
             vmodel.ListOfSeasons = season.Collection();
 
             vmodel.ListOfGames = listGame;
-            vmodel.ListOfMatches = matches;
+            vmodel.ListOfMatches = matches.ToList().ToPagedList(i ?? 1, 6);
 
             return View(vmodel);
         }

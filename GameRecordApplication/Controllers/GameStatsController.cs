@@ -17,13 +17,15 @@ namespace GameRecordApplication.Controllers
         IRepository<Season> season;
         IRepository<Match> match;
         IRepository<User> user;
+        IRepository<Fields> Ifield;
 
-        public GameStatsController(IRepository<Game> game, IRepository<Season> season, IRepository<Match> match, IRepository<User> user)
+        public GameStatsController(IRepository<Game> game, IRepository<Season> season, IRepository<Match> match, IRepository<User> user, IRepository<Fields> field)
         {
             this.game = game;
             this.season = season;
             this.match = match;
             this.user = user;
+            this.Ifield = field;
         }
 
         // GET: GameStats
@@ -33,7 +35,6 @@ namespace GameRecordApplication.Controllers
             MatchViewModel vmodel = new MatchViewModel();
             IEnumerable<long> gameIdList;
             IEnumerable<Match> matches;
-            IEnumerable<User> users;
             ViewBag.SuccessMessage = "";
             long gameId = 0;
 
@@ -62,6 +63,7 @@ namespace GameRecordApplication.Controllers
 
             vmodel.ListOfGames = listGame;
             vmodel.ListOfMatches = matches.ToList().ToPagedList(i ?? 1, 6);
+
 
             return View(vmodel);
         }

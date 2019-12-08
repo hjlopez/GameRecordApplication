@@ -21,5 +21,7 @@ namespace GameRecordApplication.Repository
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<DotaHeroAttribute> DotaHeroAttributes { get; set; }
+        public DbSet<Fields> Fields { get; set; }
+        public DbSet<Module> Modules { get; set; }
     }
 }

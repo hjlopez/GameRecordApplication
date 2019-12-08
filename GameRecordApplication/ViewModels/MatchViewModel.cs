@@ -17,11 +17,13 @@ namespace GameRecordApplication.ViewModels
         public Season Season { get; set; }
         public DotaHero DotaHero { get; set; }
         public Weapon Weapon   { get; set; }
+        public Fields Field { get; set; }
         public IEnumerable<Game> ListOfGames { get; set; }
         public IPagedList<Match> ListOfMatches { get; set; }
         public IEnumerable<Season> ListOfSeasons { get; set; }
         public IEnumerable<User> ListOfUsers { get; set; }
         public IEnumerable<Weapon> ListOfWeapons { get; set; }
+        public IEnumerable<Fields> ListOfFields { get; set; }
 
         public bool IsErrorMessage { get; set; }
     }

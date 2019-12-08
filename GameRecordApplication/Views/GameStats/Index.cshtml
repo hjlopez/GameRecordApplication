@@ -41,15 +41,6 @@
     {
         <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
 
-        @*var team = Model.ListOfGames.First(a => a.GameName == Request.Params["Category"].ToString());
-            if (team.IsTeamGame)
-            {
-                <a class="btn btn-success" data-target="#teamSettings" data-toggle="modal">New Entry</a>
-            }
-            else
-            {
-                <a class="btn btn-success" href="@Url.Action("Create", "Match", new { Category = Request["Category"] })">New Entry</a>
-            }*@
 
     }
 </div>
@@ -59,6 +50,7 @@
         if (Request.Params["Category"] == game.GameName && game.HasSeason)
         {
             <div>
+                <a class="btn btn-success">Game Settings</a>
                 <a class="btn btn-primary" data-target="#filter" data-toggle="modal">Filter by Season</a>
                 <a class="btn btn-primary" data-target="#addSeason" data-toggle="modal">Add Season</a>
             </div>
@@ -78,7 +70,7 @@
                             @* Display player names *@
                             <h5 class="card-title">@Model.ListOfUsers.FirstOrDefault(user => user.UserId == Model.ListOfMatches.ElementAt(i).PlayerWin).FirstName  vs @Model.ListOfUsers.FirstOrDefault(user => user.UserId == Model.ListOfMatches.ElementAt(i).PlayerIdLose).FirstName</h5>
                             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary link">Go somewhere</a>
+                            <a href="#" class="btn btn-primary link">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -91,7 +83,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">@Model.ListOfUsers.FirstOrDefault(user => user.UserId == Model.ListOfMatches.ElementAt(i).PlayerWin).FirstName  vs @Model.ListOfUsers.FirstOrDefault(user => user.UserId == Model.ListOfMatches.ElementAt(i).PlayerIdLose).FirstName</h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary link">Go somewhere</a>
+                                <a href="#" class="btn btn-primary link">View Details</a>
                             </div>
                         </div>
                     </div>

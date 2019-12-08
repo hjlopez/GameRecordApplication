@@ -207,6 +207,7 @@
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DotaHeroController.cs" />
+    <Compile Include="Controllers\FieldsController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\GameStatsController.cs" />
     <Compile Include="Controllers\GameTypeController.cs" />
@@ -277,11 +278,29 @@
     <Compile Include="Migrations\201911261323168_UpdateMatchDataType.Designer.cs">
       <DependentUpon>201911261323168_UpdateMatchDataType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912070420422_Fields.cs" />
+    <Compile Include="Migrations\201912070420422_Fields.Designer.cs">
+      <DependentUpon>201912070420422_Fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912070521226_ModulesTable.cs" />
+    <Compile Include="Migrations\201912070521226_ModulesTable.Designer.cs">
+      <DependentUpon>201912070521226_ModulesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912080322160_removeRequiredTag_Fields.cs" />
+    <Compile Include="Migrations\201912080322160_removeRequiredTag_Fields.Designer.cs">
+      <DependentUpon>201912080322160_removeRequiredTag_Fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912081316315_AddFieldId_Fields.cs" />
+    <Compile Include="Migrations\201912081316315_AddFieldId_Fields.Designer.cs">
+      <DependentUpon>201912081316315_AddFieldId_Fields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotaHero.cs" />
     <Compile Include="Models\DotaHeroAttribute.cs" />
+    <Compile Include="Models\Fields.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\GameTypes.cs" />
+    <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Season.cs" />
     <Compile Include="Models\Match.cs" />
     <Compile Include="Repository\DataContext.cs" />
@@ -290,6 +309,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Repository\SQLRepository.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\FieldsVIewModel.cs" />
     <Compile Include="ViewModels\HeroViewModel.cs" />
     <Compile Include="ViewModels\MatchViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
@@ -373,6 +393,7 @@
     <Content Include="Views\Hero\Index.cshtml" />
     <Content Include="Views\Hero\CreateAttribute.cshtml" />
     <Content Include="Views\Weapon\Index.cshtml" />
+    <Content Include="Views\Fields\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -434,6 +455,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911261323168_UpdateMatchDataType.resx">
       <DependentUpon>201911261323168_UpdateMatchDataType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912070420422_Fields.resx">
+      <DependentUpon>201912070420422_Fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912070521226_ModulesTable.resx">
+      <DependentUpon>201912070521226_ModulesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912080322160_removeRequiredTag_Fields.resx">
+      <DependentUpon>201912080322160_removeRequiredTag_Fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912081316315_AddFieldId_Fields.resx">
+      <DependentUpon>201912081316315_AddFieldId_Fields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,168 @@
+﻿@model GameRecordApplication.ViewModels.FieldsVIewModel
+
+<style>
+</style>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<h2>Application Fields</h2>
+
+<br />
+<div class="col-md-2">
+    @if (Model.Modules.Count() != 0)
+    {
+        <h4>Filter by Module</h4>
+        <div class="list-group">
+            @*@Html.ActionLink("All", "Index", null, new { @class = Request["Category"] == null ? "list-group-item active" : "list-group-item" })*@
+            @foreach (var mod in Model.Modules)
+            {
+                @Html.ActionLink(mod.ModuleName, "Index", new { ModuleVal = mod.ModuleName }, new { @class = Request["ModuleVal"] == mod.ModuleName ? "list-group-item active" : "list-group-item" })
+            }
+        </div>
+    }
+
+</div>
+
+<div class="col-md-10">
+    <a class="btn btn-primary" onclick="showHide()" id="btnModule">Add Module</a>
+    <a class="btn btn-primary" onclick="addField()" id="btnField">Add Field</a>
+
+    
+    @* Add Module form *@
+    <div id="Module" style="display:none;">
+        @using (Html.BeginForm("CreateModule", "Fields", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+
+            <br />
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Module.ModuleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Module.ModuleName, new { htmlAttributes = new { @class = "form-control" }})
+                        @Html.ValidationMessageFor(model => model.Module.ModuleName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add Module" class="btn btn-success" />
+                </div>
+            </div>
+        }
+    </div>
+        
+    @* Add field form *@
+    <div id="Field" style="display:none;">
+        @using (Html.BeginForm("CreateField", "Fields", new { ModuleVal = Request["ModuleVal"] }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+
+            <br />
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Field.Module, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => Request["ModuleVal"], new { htmlAttributes = new { @class = "form-control" }, disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Field.FieldName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Field.FieldName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Field.FieldName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Field.FieldName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Field.AciveField, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Field.AciveField)
+                            @Html.ValidationMessageFor(model => model.Field.AciveField, "", new { @class = "text-danger" })
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Add Field" class="btn btn-success" />
+                </div>
+            </div>
+        }
+    </div>
+
+    
+    @* Field list  *@
+    <div>
+        <br />
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Field.FieldName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Field.AciveField)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var fields in Model.Fields)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => fields.FieldName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => fields.AciveField)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = fields.FieldId })
+                    </td>
+                </tr>
+            }
+        </table>
+
+        @Html.PagedListPager(Model.Fields, i => Url.Action("Index", "Fields", new { ModuleVal = Request["ModuleVal"],i}))
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function showHide() {
+        var mod = document.getElementById("Module");
+        if (mod.style.display == "none") {
+            mod.style.display = "block";
+            document.getElementById("btnModule").innerText = "Cancel Add Module";
+        } else {
+            document.getElementById("btnModule").innerText = "Add Module";
+            mod.style.display = "none";
+        }
+        
+    }
+
+    function addField() {
+        var mod = document.getElementById("Field");
+        if (mod.style.display == "none") {
+            mod.style.display = "block";
+            document.getElementById("btnField").innerText = "Cancel Add Field";
+        } else {
+            document.getElementById("btnField").innerText = "Add Field";
+            mod.style.display = "none";
+        }
+
+    }
+</script>
+

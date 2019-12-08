@@ -31,10 +31,10 @@
                             </a>
                             <ul class="dropdown-menu">
 
-                                <li><a href="@Url.Action("Index", "User")">User</a></li>
+                                <li><a href="@Url.Action("Index", "User")"><span class="glyphicon glyphicon-user"></span> User</a></li>
                                 @*<li><a href="@Url.Action("Index", "Game")">Game</a></li>*@
                                 <li class="dropdown-submenu">
-                                    <a tabindex="-1" href="#">Game</a>
+                                    <a tabindex="-1" href="#"><span class="glyphicon glyphicon-star"></span> Game</a>
                                     <ul class="dropdown-menu">
                                         @*<li><a tabindex="-1" href="#">Second level</a></li>*@
                                         <li><a href="@Url.Action("Index", "Game")">Game List</a></li>
@@ -43,8 +43,9 @@
                                         <li><a href="@Url.Action("Index", "Weapon")">Weapons</a></li>
                                     </ul>
                                 </li>
-                                
-                                <li><a href="@Url.Action("Index", "Maintenance")">Stats</a></li>
+
+                                <li><a href="@Url.Action("Index", "Maintenance")"><span class="glyphicon glyphicon-stats"></span> Stats</a></li>
+                                <li><a href="@Url.Action("Index", "Fields")"><span class="glyphicon glyphicon-list"></span> Fields</a></li>
                             </ul>
                         </li>
                     }

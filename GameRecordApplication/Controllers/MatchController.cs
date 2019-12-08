@@ -15,13 +15,15 @@ namespace GameRecordApplication.Controllers
         IRepository<Season> Iseason;
         IRepository<User> Iuser;
         IRepository<Match> Imatch;
+        IRepository<Fields> Ifield;
 
-        public MatchController(IRepository<Game> game, IRepository<Season> season, IRepository<User> user, IRepository<Match> Imatch)
+        public MatchController(IRepository<Game> game, IRepository<Season> season, IRepository<User> user, IRepository<Match> Imatch, IRepository<Fields> Ifield)
         {
             this.game = game;
             this.Iseason = season;
             this.Iuser = user;
             this.Imatch = Imatch;
+            this.Ifield = Ifield;
         }
 
         // GET: Match
@@ -36,13 +38,14 @@ namespace GameRecordApplication.Controllers
             return View();
         }
 
-       
+
         // GET: Match/Create
-        public ActionResult Create(string Category = null, bool weaponReq = false)
+        public ActionResult Create(string Category = null, bool weaponReq = false, string message = "")
         {
             List<Game> games = game.Collection().ToList();
             List<Season> seasons = Iseason.Collection().ToList();
             List<User> users = Iuser.Collection().ToList();
+            ViewBag.Message = message;
 
             // add N/A 
             users.Add(new User { FirstName = "N/A", UserId = "0" });
@@ -55,31 +58,45 @@ namespace GameRecordApplication.Controllers
             };
 
             viewModel.ListOfSeasons = seasons.Where(a => a.GameId == viewModel.Game.GameId).OrderBy(a => a.SeasonNumber);
-            
+            viewModel.ListOfFields = Ifield.Collection().Where(a => a.Module == "Match").ToList();
 
             return View(viewModel);
         }
 
         // POST: Match/Create
         [HttpPost]
-        public ActionResult Create(MatchViewModel viewModel, string category = "")
+        public ActionResult Create(MatchViewModel viewModel, Match match,string category = "")
         {
             IEnumerable<Game> gameTemp;
+            ViewBag.Message = "";
 
             gameTemp = game.Collection();
 
-            viewModel.Match.SeasonId = Convert.ToInt64(Request.Form["Season"]);
             viewModel.Match.PlayerWin = Request.Form["WinPlayer"];
+            viewModel.Match.SeasonId = Convert.ToInt64(Request.Form["Season"]);
+            
             viewModel.Match.PlayerIdLose = Request.Form["LossPlayer"];
             viewModel.Game = gameTemp.First(a => a.GameName == category);
 
             // insert to match
             viewModel.Match.GameId = viewModel.Game.GameId;
 
+            viewModel.IsErrorMessage = false;
+            if (category == "Billiards")
+            {
+                if (viewModel.Match.PlayerIdLose == "0" || viewModel.Match.PlayerWin == "0")
+                {
+                    viewModel.IsErrorMessage = true;
+                    ViewBag.Message = "Winning and Losing player is required.";
+
+                    return RedirectToAction("Create", "Match", new { Category = category, message = ViewBag.Message });
+                }
+            }
+
             Imatch.Insert(viewModel.Match);
             Imatch.Commit();
 
-            return RedirectToAction("Index","GameStats",new { Category = category });
+            return RedirectToAction("Index", "GameStats", new { Category = category });
         }
 
         // GET: Match/Edit/5
